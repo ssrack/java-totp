@@ -1,0 +1,12 @@
+
+*.lock
+*.bin
+*.xml
+*.xml
+*.bin
+*.properties
+*.class
+*.html
+*.css
+*.idx
+*.js
