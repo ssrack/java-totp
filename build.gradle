@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'org.bitbyte'
-version '0.0.1-SNAPSHOT'
+version '0.0.2-SNAPSHOT'
 
 configurations {
     compileOnly {
@@ -13,6 +14,7 @@ configurations {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -34,10 +36,10 @@ test  {
     environment('SENDER_PASSWORD', sender_password)
 }
 
-//publishing {
-//    publications {
-//        mavenJava(MavenPublication) {
-//            from components.java
-//        }
-//    }
-//}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}

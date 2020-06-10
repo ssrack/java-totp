@@ -3,6 +3,8 @@ package org.bitbyte.javatotp;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
+import java.util.Map;
+
 import static java.lang.System.getenv;
 import static org.bitbyte.javatotp.EmailUtility.generateQRCode;
 import static org.bitbyte.javatotp.EmailUtility.sendBarCodeToEmail;
@@ -22,7 +24,8 @@ public class RegistrationTest {
     @SneakyThrows
     @Test
     public void testRegistration() {
-        String barCodeURL = getGoogleAuthenticatorBarCodeURL(ISSUER, APPLICATION_NAME);
+        Map<String, String> urlAndKeyMap = getGoogleAuthenticatorBarCodeURL(ISSUER, APPLICATION_NAME);
+        String barCodeURL = urlAndKeyMap.get("barcode_url");
         generateQRCode(barCodeURL, FILE_PATH, 500, 500);
 
         EmailProperties properties = new EmailProperties
@@ -36,6 +39,11 @@ public class RegistrationTest {
                 .recipient(RECIPIENT)
                 .build();
         sendBarCodeToEmail(properties, FILE_PATH);
+
+        String secretKey = urlAndKeyMap.get("secret_key");
+        String otpCode = getOTPCode(secretKey);
+        boolean valid = validate(secretKey, otpCode);
+        assertEquals(true, valid);
     }
 
     @Test

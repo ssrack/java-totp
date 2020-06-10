@@ -11,6 +11,8 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Long.toHexString;
 import static java.lang.System.arraycopy;
@@ -23,18 +25,23 @@ import static org.apache.commons.codec.binary.Hex.encodeHexString;
 @Slf4j
 public class TOTPUtility {
 
-    public static String getGoogleAuthenticatorBarCodeURL(final String issuer, final String applicationName)  {
+    public static Map<String, String> getGoogleAuthenticatorBarCodeURL(final String issuer, final String applicationName)  {
 
         String secretKey = generateSecretKey();
         log.info("TOTPUtility: getGoogleAuthenticatorBarCodeURL: generated secret key -> {}", secretKey);
         try {
-            return "otpauth://totp/"
+            Map<String, String> urlAndKeyMap = new HashMap<>(2);
+            urlAndKeyMap.put("secret_key", secretKey);
+
+            String barCodeUrl = "otpauth://totp/"
                     + encode(issuer + ":" + applicationName, "UTF-8")
                     .replace("+", "%20")
                     + "?secret=" + encode(secretKey, "UTF-8")
                     .replace("+", "%20")
                     + "&issuer=" + encode(issuer, "UTF-8")
                     .replace("+", "%20");
+            urlAndKeyMap.put("barcode_url", barCodeUrl);
+            return urlAndKeyMap;
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
         }
