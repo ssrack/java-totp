@@ -1,4 +1,4 @@
-package org.bitbyte.javatotp;
+package io.github.ssrack.javatotp;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

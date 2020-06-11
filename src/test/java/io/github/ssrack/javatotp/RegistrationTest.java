@@ -1,4 +1,4 @@
-package org.bitbyte.javatotp;
+package io.github.ssrack.javatotp;
 
 import lombok.SneakyThrows;
 import org.junit.Test;
@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.util.Map;
 
 import static java.lang.System.getenv;
-import static org.bitbyte.javatotp.EmailUtility.generateQRCode;
-import static org.bitbyte.javatotp.EmailUtility.sendBarCodeToEmail;
-import static org.bitbyte.javatotp.TOTPUtility.*;
+import static io.github.ssrack.javatotp.EmailUtility.generateQRCode;
+import static io.github.ssrack.javatotp.EmailUtility.sendBarCodeToEmail;
+import static io.github.ssrack.javatotp.TOTPUtility.*;
 import static org.junit.Assert.assertEquals;
 
 public class RegistrationTest {

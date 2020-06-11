@@ -1,10 +1,11 @@
 plugins {
     id 'java'
+    id 'maven'
     id 'maven-publish'
 }
 
 group 'org.bitbyte'
-version '0.0.2-SNAPSHOT'
+version '0.0.3-Release'
 
 configurations {
     compileOnly {
@@ -38,7 +39,7 @@ test  {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        maven(MavenPublication) {
             from components.java
         }
     }

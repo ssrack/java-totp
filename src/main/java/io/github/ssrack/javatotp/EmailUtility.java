@@ -1,4 +1,4 @@
-package org.bitbyte.javatotp;
+package io.github.ssrack.javatotp;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
